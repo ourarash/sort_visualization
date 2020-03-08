@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>sort</title>
+
+    <script src="libraries/p5.js"></script>
+    <script src="libraries/p5.dom.js"></script>
+    <script src="libraries/p5.sound.js"></script>
+    <script src="sketch.js"></script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      canvas {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+
+    <div>
+      <input type="radio" id="bubbleSort" name="gender" value="bubbleSort" />
+      <label for="bubbleSort">bubbleSort</label><br />
+      <input
+        type="radio"
+        id="selectionSort"
+        name="gender"
+        value="selectionSort"
+      />
+      <label for="selectionSort">selectionSort</label><br />
+      <input type="radio" id="mergeSort" name="gender" value="mergeSort" />
+      <label for="mergeSort">mergeSort</label> <br />
+
+      <input type="radio" id="quickSort" name="gender" value="quickSort" />
+      <label for="quickSort">quickSort</label><br />
+
+      <input type="radio" id="heapSort" name="gender" value="heapSort" />
+      <label for="heapSort">heapSort</label><br />
+
+      <br />
+
+      <button type="button" onclick="displayRadioValue()"> 
+        Submit 
+    </button> 
+
+      <div id="result"></div> 
+
+
+      <br />
+    </div>
+  </body>
+</html>
