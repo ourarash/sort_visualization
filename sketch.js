@@ -84,6 +84,7 @@ function displayRadioValue() {
     if (ele[i].checked) {
       document.getElementById("result").innerHTML = "Gender: " + ele[i].value;
       sort = ele[i].value;
+      playOscillator();
       init(sort);
       time = 0;
       delayTime = 0;
@@ -123,28 +124,39 @@ function stopOscillator() {
 async function draw() {
   background(0);
   stroke(255, 0, 0);
-  strokeWeight(globals.w); // Default
+  strokeWeight(globals.w);
+
   // Before running the sort algorithm, first play the whole array
   if (delayTime > globals.values.length) {
+    let label;
     switch (sort) {
       case "bubbleSort":
+        label = "Bubble Sort";
         bubbleSort();
         break;
-
       case "selectionSort":
+        label = "Selection Sort";
         selectionSort(globals.values);
         break;
-
       case "mergeSort":
+        label = "Merge Sort";
         mergeSort(globals.values);
         break;
       case "heapSort":
+        label = "Heap Sort";
         heapSort(globals.values);
         break;
       case "quickSort":
+        label = "Quick Sort";
         quickSortIterative(globals.values, 0, globals.values.length - 1);
         break;
     }
+
+    push();
+    textSize(32);
+    fill(255, 255, 255);
+    text(label, width / 4, height / 10);
+    pop();
     time++;
   } else {
     for (let i = 0; i < globals.values.length; i++) {
@@ -167,7 +179,7 @@ async function draw() {
   delayTime++;
 }
 
-// Draws a rectangle and also plays a note with 
+// Draws a rectangle and also plays a note with
 // frequency relative to the height (h)
 function DrawRect(x, y, w, h, play = true) {
   if (globals.playing && play) {
@@ -292,9 +304,9 @@ function bubbleSort() {
     );
   }
 
-  if (!foundSwap) {
+  if (globals.bubbleSort.lastRightIndex<1) {
     globals.bubbleSort.status = true;
-    globals.osc.amp(0);
+    globals.osc.amp(0, 1);
   }
   globals.bubbleSort.i++;
   if (globals.bubbleSort.i > globals.bubbleSort.lastRightIndex) {
@@ -409,8 +421,7 @@ function mergeSort(input) {
 
   if (globals.mergeSort.curr_size > input.length) {
     globals.mergeSort.status = true;
-    globals.osc.amp(0);
-  }
+    globals.osc.amp(0, 1);  }
 }
 //-----------------------------------------------------------------------------
 // quicksort functions
@@ -497,8 +508,7 @@ function quickSortIterative(arr, l, h) {
     }
   } else {
     globals.quickSort.status = true;
-    globals.osc.amp(0, 0.1);
-  }
+    globals.osc.amp(0, 1);  }
 }
 //-----------------------------------------------------------------------------
 // Heapsort functions
@@ -551,8 +561,7 @@ function heapSort(arr) {
     globals.heapSort.i--;
   } else {
     globals.heapSort.status = true;
-    globals.osc.amp(0, 0.1);
-  }
+    globals.osc.amp(0, 1);  }
 
   for (let i = 0; i < arr.length; i++) {
     stroke(255, 0, 0);
