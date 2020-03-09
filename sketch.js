@@ -183,8 +183,8 @@ async function draw() {
 // frequency relative to the height (h)
 function DrawRect(x, y, w, h, play = true) {
   if (globals.playing && play) {
-    f = map(-h, 0, height, 200, 5000);
-    freq = constrain(f, 200, 5000);
+    f = map(-h, 0, height, 200, 1000);
+    freq = constrain(f, 200, 1000);
 
     globals.osc.freq(f);
     globals.osc.amp(1, 0.1);
@@ -566,13 +566,14 @@ function heapSort(arr) {
   for (let i = 0; i < arr.length; i++) {
     stroke(255, 0, 0);
     fill(0, 255, 0);
+    if (i <1) {
+      fill(255, 0, 0);
+    }else
     if (i < globals.heapSort.i) {
       fill(255, 255, 0);
     } else if (i == globals.heapSort.i || i == globals.heapSort.i + 1) {
       fill(255, 0, 0);
-    } else if (i == 0) {
-      fill(255, 0, 0);
-    }
+    } 
     DrawRect(
       (i * width) / globals.n,
       height,
